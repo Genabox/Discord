@@ -1,0 +1,26 @@
+<servers>
+  <server1>
+    <name>new</name>
+    <user>test</user>
+    <ip>1.1.1.1</ip>
+    <password>qwerty</password>
+  </server1>
+  <server2><
+    name>new2</name>
+    <user>test2</user>
+    <ip>1.1.1.1</ip>
+    <password>qwerty</password>
+  </server2>
+  <server3>
+    <name>new3</name>
+    <user>gena</user>
+    <ip>1.1.1.1</ip>
+    <password>qwerty</password>
+  </server3>
+  <server4>
+    <name>test4</name>
+    <user>test4</user>
+    <ip>1.1.1.1</ip>
+    <password>qwerty</password>
+  </server4>
+</servers>
