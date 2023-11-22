@@ -1,4 +1,4 @@
-Welcome to bot software folder for Discord
+# Welcome to bot software folder for Discord
 
 It is our library of Discord bots for GitHub! Here, you will find a collection of useful bots that will enhance your everyday life and assist in organizing your business on the Discord platform.
 
