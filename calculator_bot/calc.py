@@ -19,7 +19,7 @@ log_file = "bot_log.txt"
 
 @bot.event
 async def on_ready():
-    print(f"@ === -- Бот успешно вошел как: {bot.user.name} -- === @ Discord")
+    print(f"@ === -- The bot successfully logged in as: {bot.user.name} -- === @ Discord")
 
 @bot.event
 async def on_message(message):
@@ -35,13 +35,13 @@ async def on_message(message):
     try:
         # Проверяем, заканчивается ли выражение оператором.
         if expression.endswith(("+", "-", "*", "/", "^")):
-            raise ValueError("Некорректное выражение: выражение заканчивается оператором.")
+            raise ValueError("НекоррCALCULATION ERROR: the expression ends with the operator.")
 
         result = N(expression)
         result_str = f'{result:.2f}' if isinstance(result, Float) else str(result)
 
         # Выводим результат выражения в зеленом цвете вместе с датой и временем.
-        log_message = f'[{now}] [CALCULATORBOT] Вычислено выражение: {expression} = {result_str}'
+        log_message = f'[{now}] [CALCULATORBOT] CALCULATION: {expression} = {result_str}'
         print(log_message)
         await message.channel.send(f'Результат: {result_str}')
 
@@ -52,9 +52,9 @@ async def on_message(message):
     except Exception as e:
 
         # Выводим ошибку в красном цвете вместе с датой и временем.
-        log_message = f'[{now}] [CALCULATORBOT] Ошибка: {str(e)}'
+        log_message = f'[{now}] [CALCULATORBOT] ERROR: {str(e)}'
         print(log_message)
-        await message.channel.send(f'[{now}] Ошибка: {str(e)}')
+        await message.channel.send(f'[{now}] ERROR: {str(e)}')
 
         # Записываем сообщение в журнал
         with open(log_file, "a") as f:
