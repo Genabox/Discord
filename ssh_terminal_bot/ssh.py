@@ -8,8 +8,6 @@
 #   ___) |__) |  _  | | |___| |___ | || |\  | |___  | |  
 #  |____/____/|_| |_|  \____|_____|___|_| \_|_____| |_|  
                                                        
-
-
 import nextcord
 from nextcord.ext import commands
 import paramiko
@@ -19,16 +17,20 @@ import xml.etree.ElementTree as ET
 import xml.dom.minidom
 from colorama import init, Fore, Style
 
+# Initialize Nextcord intents
 intents = nextcord.Intents.default()
 intents.message_content = True
 
+# Create a bot instance
 bot = commands.Bot(command_prefix='/', intents=intents)
-channelid = ''  # text bot testing chat
-token = ''
+
+# Replace with your specific Discord channel ID and bot token
+channelid = ''  # Discord channel ID for bot testing
+token = ''  # Your bot token
 
 # Global variables
 ssh_clients = {}  # Dictionary to store SSH clients for each server
-base_dir = "H:\\soft\\python\\ssh"  # Укажите путь к базовому каталогу
+base_dir = "H:\\soft\\python\\ssh"  # Specify the path to the base directory
 file_name = "serverlist.xml"
 server_list_file = os.path.join(base_dir, file_name)
 
@@ -101,7 +103,7 @@ async def addserver(ctx, server_name: str, server_info: str):
     server_info_parts = server_info.split("@")
     if len(server_info_parts) == 2:
         user, ip = server_info_parts
-        password = "qwerty"  # Здесь вы можете установить пароль по умолчанию
+        password = "qwerty"  # You can set a default password here
     else:
         await ctx.send("Invalid server_info format. Use 'user@ip'.")
         return
@@ -171,38 +173,39 @@ async def removeserver(ctx, server_identifier: str):
 # Global variables
 ssh_clients = {}  # Dictionary to store SSH clients for each server
 ssh_current_directory = {}  # Dictionary to store current directories for each server
+
 @bot.event
 async def on_message(message):
     if message.author.bot:
-        return  # Игнорировать сообщения от других ботов
+        return  # Ignore messages from other bots
 
     if message.author == bot.user:
-        return  # Игнорировать сообщения от самого бота
+        return  # Ignore messages from the bot itself
 
-    # Проверить, установлено ли SSH-соединение для данного сервера
+    # Check if an SSH connection is established for the server associated with the message
     if message.guild.id in ssh_clients:
         ssh_client = ssh_clients[message.guild.id]
 
-        # Получаем текущий путь на сервере
+        # Get the current directory on the server
         current_directory = ssh_current_directory.get(message.guild.id, "/")
 
-        # Собираем текст из всех сообщений в чате
+        # Concatenate text from all messages in the chat
         command = message.content
-        async for msg in message.channel.history(limit=10):  # Можете настроить лимит сообщений
+        async for msg in message.channel.history(limit=10):  # You can customize the message history limit
             if msg != message and not msg.author.bot:
                 command += "\n" + msg.content
 
-        # Если команда начинается с /cd, обновляем текущий путь
+        # If the command starts with /cd, update the current directory
         if command.startswith("/cd "):
             new_directory = command.split("/cd ", 1)[1]
             ssh_current_directory[message.guild.id] = new_directory
             await message.channel.send(f"Changed directory to: {new_directory}")
             return
 
-        # Полный путь к команде
+        # Full command to execute on the server
         full_command = f"(cd {current_directory} && {command})"
 
-        # Отправить текст как команду на сервер SSH
+        # Send the text as a command to the SSH server
         try:
             stdin, stdout, stderr = ssh_client.exec_command(full_command)
             response = stdout.read().decode("utf-8")
@@ -210,8 +213,7 @@ async def on_message(message):
         except Exception as e:
             await message.channel.send(f"Failed to send command to SSH: {str(e)}")
     else:
-        await bot.process_commands(message)  # Обязательно вызывать эту функцию для обработки других команд
-
+        await bot.process_commands(message)  # Be sure to call this function to handle other commands
 
 @bot.command()
 async def connect(ctx, server_identifier: str):
@@ -241,11 +243,11 @@ async def connect(ctx, server_identifier: str):
             ssh_client = paramiko.SSHClient()
             ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             ssh_client.connect(host, username=username, password=password)
-            
+
             ssh_clients[ctx.guild.id] = ssh_client
             await ctx.send(f"Connected to {host} as {username}.")
             await ctx.send("Now mirroring messages between Discord and SSH. Type `/disconnect` to disconnect.")
-            
+
             await start_mirroring(ctx, ssh_client)
         except Exception as e:
             await ctx.send(f"Failed to connect to {host}: {str(e)}")
@@ -278,11 +280,11 @@ async def start_mirroring(ctx, ssh_client):
         if message.content.startswith("/disconnect"):
             # Send exit or logout command to SSH session
             try:
-                ssh_client.exec_command("exit")  # Здесь можно использовать "exit" или "logout"
-                await asyncio.sleep(2)  # Подождите некоторое время, чтобы SSH сессия завершилась
+                ssh_client.exec_command("exit")  # You can use "exit" or "logout" here
+                await asyncio.sleep(2)  # Wait for some time to allow SSH session to finish
                 ssh_client.close()
 
-                # Удалите SSH клиент из словаря
+                # Remove the SSH client from the dictionary
                 del ssh_clients[ctx.guild.id]
 
                 await ctx.send("Disconnected from the server.")
@@ -304,31 +306,17 @@ async def start_mirroring(ctx, ssh_client):
         except Exception as e:
             await ctx.send(f"Failed to send message to SSH: {str(e)}")
 
-            ssh_client.close()
-
-            # Удалите SSH клиент из словаря
-            del ssh_clients[ctx.guild.id]
-
-            await ctx.send("Disconnected from the server.")
-            break
-
-
 @bot.command()
 async def helpme(ctx):
     embed = nextcord.Embed(title="SSH Bot Commands", color=0x00ff00)
     embed.add_field(name="/serverlist", value="List available servers.", inline=False)
     embed.add_field(name="/addserver [name] [user@ip] [password]", value="Add a new server to the list.", inline=False)
     embed.add_field(name="/removeserver [name or index]", value="Remove a server from the list.", inline=False)
-    embed.add_field(name="/readsetup", value="Showing server setup file with passwords and all information.", inline=False)
+    embed.add_field(name="/readsetup", value="Show server setup file with passwords and all information.", inline=False)
     embed.add_field(name="/connect [name or index]", value="Connect to a server from the list.", inline=False)
     embed.add_field(name="/disconnect", value="Disconnect from the connected server.", inline=False)
-    embed.add_field(name="ssh commands", value="Use pdw, cd, dir and other commands to explore folders", inline=False)
+    embed.add_field(name="ssh commands", value="Use pwd, cd, dir, and other commands to explore folders", inline=False)
     await ctx.send(embed=embed)
-
-
-
- 
-
 
 # Run the bot
 bot.run(token)
