@@ -8,7 +8,8 @@ Command Execution: Execute SSH commands on connected servers directly from Disco
 Interactive Shell: Use an interactive shell to navigate and run commands on remote servers.
 Disconnect Gracefully: Disconnect from servers and terminate SSH sessions with a simple command.
 Helpful Commands: Access a list of available bot commands to manage servers and interactions.
-Usage
+
+Usage 
 Add your servers to the bot's configuration.
 Connect to a server using /connect command.
 Execute commands on the connected server using Discord chat.
