@@ -63,3 +63,6 @@ async def on_message(message):
     await bot.process_commands(message)
 
 bot.run(TOKEN)
+
+#by Genabox
+# if you want, say thanks ~ btc: 14CZG7Tp9vyHLxJoCi1FYKzgyjeG3BuPMe
