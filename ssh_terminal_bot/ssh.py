@@ -332,4 +332,4 @@ bot.run(token)
 # | _ \\ V /    | (_ | _|| .` |/ _ \ | _ \ (_) >  <  
 # |___/ |_|      \___|___|_|\_/_/ \_\|___/\___/_/\_\ 
 #                                                   
-#  
+#  # if you want, say thanks ~ btc: 14CZG7Tp9vyHLxJoCi1FYKzgyjeG3BuPMe
