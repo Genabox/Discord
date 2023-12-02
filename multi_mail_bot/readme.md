@@ -1,6 +1,3 @@
-test
-
-
 # Short description
 
         
@@ -8,7 +5,7 @@ test
         
                 # F U T U R E S:
         #______________________________________
- 
+
             # - Make a new letter:
 
         #/newletter (type /newletter to send a new letter) Example: #(line1) '/newletter'
@@ -30,7 +27,7 @@ test
 
         #/mail - Check mail...
         # ``````````````````````
-        
+
             # - Sending a reply:
 
         # Send a reply to a message on mail in a Discord channel - the email will be sent to the sender's mailbox @
