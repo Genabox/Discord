@@ -8,10 +8,8 @@ test
         
                 # F U T U R E S:
         #______________________________________
-
+ 
             # - Make a new letter:
-
-        #/mail - Check mail...
 
         #/newletter (type /newletter to send a new letter) Example: #(line1) '/newletter'
         # Type the recipient's email on line number two Example: #(line2) 'email@email'
@@ -28,6 +26,11 @@ test
         # That is all.
         # ``````````````````````
 
+            # - Check mail:
+
+        #/mail - Check mail...
+        # ``````````````````````
+        
             # - Sending a reply:
 
         # Send a reply to a message on mail in a Discord channel - the email will be sent to the sender's mailbox @
@@ -66,3 +69,5 @@ test
         # Set up channels on your server and set IDs to the script; you can also set up your contacts' personal channels in the mail category
 
         # Run the Python script; as a result, you will see "Bot online," and you will see new mail on your channels
+
+        # ``````````````````````
