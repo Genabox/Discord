@@ -49,7 +49,7 @@ test
 
         # Set Interval in seconds to fetch your mailbox
 
-        # You can set up music files from the archive to set notifications on new letters
+        # You can set up music files from the archive to set notifications on new letters, just uncommit lines with sound definition to play them on terminal window or translate this sound to your other devices
 
         # /helpme - get help on chat
 
