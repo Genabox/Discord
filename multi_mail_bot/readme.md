@@ -1,4 +1,4 @@
-# Short description
+# Multy-mail bot software description
 
         
         #______________________________________
