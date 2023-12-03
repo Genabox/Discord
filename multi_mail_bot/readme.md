@@ -50,6 +50,8 @@
 
         # /helpme - get help on chat
 
+        # Important: if you read a letter in your mailbox and it is marked as read, it will be ignored by the bot and will not be delivered to the chat if this has not already happened
+
         # If you see an authentication problem, then you need to create access to other software and make a technical password on your mail provider in your account to allow access to this bot.
         # ``````````````````````
 
