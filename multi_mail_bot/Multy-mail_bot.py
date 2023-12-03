@@ -265,7 +265,7 @@ email_accounts = [
 #                                        ``````````                   ``````````
     #                                        ``````````                   ``````````
 
-                                        #   P R O C E S S I N G    M A I L    L E L L E R    T E X T    F O R   C H A T
+                                        #   P R O C E S S I N G    M A I L    L E T T E R    T E X T    F O R   C H A T
 
 ######################## THIS FUNCTION CLEANING UP TEXT IN RECEIVED LETTERS TO POST IT IN CHAT THREAD ######################## 
 def clean_text(text):
