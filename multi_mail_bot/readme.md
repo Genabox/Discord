@@ -33,7 +33,7 @@
         # Send a reply to a message on mail in a Discord channel - the email will be sent to the sender's mailbox @
         # ``````````````````````
 
-            # - Software multi-mail bot description:
+            # - Software multy-mail bot description:
 
         # Add multiple accounts as you need, one per 1 text channel. Each text channel works like a mailbox for one account. Use another text channel for a second mail account, and set
         # channel IDs to configure it. Don't forget emojis to design your message folder style (Discord channel name setup, just copy and paste your favorite emoji into the text field)
