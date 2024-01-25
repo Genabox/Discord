@@ -428,16 +428,16 @@ async def fetch_mail(account):
                     mail_server.store(message_id, '+FLAGS', '\\Seen')
 
                     # Print a message to indicate successful email processing.
-                    print(f'{Fore.GREEN}[{get_current_time()}] [MAILBOT] New letters received.{Style.RESET_ALL}')
+                    print(f'{Fore.GREEN}[{get_current_time()}] [MAILBOT] {email_address} New letters received.{Style.RESET_ALL}')
 
                 mail_server.logout()
 
             # Print a message to indicate successful completion of email processing.
-            print(f'{Fore.LIGHTRED_EX}[{get_current_time()}] [MAILBOT] Letters successfully received and processed.{Style.RESET_ALL}')
+            print(f'{Fore.LIGHTRED_EX}[{get_current_time()}] [MAILBOT] {email_address} Letters successfully received and processed.{Style.RESET_ALL}')
 
         except Exception as e:
             # Print an error message in case of any exceptions.
-            print(f'{Fore.RED}[{get_current_time()}] [MAILBOT] Error while receiving or processing emails: {e}{Style.RESET_ALL}')
+            print(f'{Fore.RED}[{get_current_time()}] [MAILBOT] {email_address} Error while receiving or processing emails: {e}{Style.RESET_ALL}')
             
         # Add a delay before fetching emails again.
         await asyncio.sleep(FETCH_INTERVAL_SECONDS)
